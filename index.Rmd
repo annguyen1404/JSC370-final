@@ -366,7 +366,7 @@ In American football, two teams play to advance the football to the opposing sid
 	
 Arguably the most reliable method of scoring points in football is by kicking the ball through the crossbar. This is the job of a kicker- whose only role in the game is to kick. Unlike many other positions- such as wide receivers, where virtually every moment on the field is different- a kicker's game is one and the same. Because of that, kicks are typically seen as "safe" methods to score and teams rely on kickers to consistently make their shot. While kicking accounts for roughly a third of all NFL scores, because it's not considered as flashy in nature as other football plays, kicking is an immensely underappreciated aspect of the sport.
 	
-In this report, we will examine the factors that contribute to a field goal kick. The question we are interested in exploring is: what variables should football coaches focus on in determining whether a field goal kick would be successful?
+In this report, we will examine the factors that contribute to a field goal kick. The question we are interested in exploring is: what variables should football coaches focus on in determining whether a field goal kick would be successful? In particular, what variables are associated with the kicking length of a field goal and what is the relationship between kicking length and kicking attempt outcome?
 	
 This project aims to help football coaches  assess whether a field goal kick would be successful at a certain game moment to help determine their next game move.
 
