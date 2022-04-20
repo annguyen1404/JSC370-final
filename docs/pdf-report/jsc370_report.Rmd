@@ -63,7 +63,7 @@ In American football, two teams play to advance the football to the opposing sid
 	
 Arguably the most reliable method of scoring points in football is by kicking the ball through the crossbar. This is the job of a kicker- whose only role in the game is to kick. Unlike many other positions- such as wide receivers, where virtually every moment on the field is different- a kicker's game is one and the same. Because of that, kicks are typically seen as "safe" methods to score and teams rely on kickers to consistently make their shot. While kicking accounts for roughly a third of all NFL scores, because it's not considered as flashy in nature as other football plays, kicking is an immensely underappreciated aspect of the sport.
 	
-In this report, we will examine the factors that contribute to a field goal kick. The question we are interested in exploring is: what variables should football coaches focus on in determining whether a field goal kick would be successful? In particular, what variables are associated with the kicking length of a field goal and what is the relationship between kicking length and kicking attempt outcome? 
+In this report, we will examine the factors that contribute to a field goal kick. The question we are interested in exploring is: what variables should football coaches focus on in determining whether a field goal kick would be successful?
 	
 This project aims to help football coaches assess whether a field goal kick would be successful at a certain game moment to help determine their next game move.
 
@@ -264,7 +264,7 @@ data[, kickLength := fcoalesce(kickLength, mean(kickLength, na.rm = TRUE)),
 
 ## Results
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center', out.height='200px'}
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center' , out.height='180px' }
 # Load in image of football field
 field <- readJPEG("../assets/field.jpg")
 field <- rasterGrob(field, width=unit(1,"npc"), height=unit(1,"npc"))
@@ -296,7 +296,7 @@ First, we visualise kicking locations by viewing a plot of the line-of-scrimmage
 
 Next, we take a look at the proportion of successful kicks at various line-of-scrimmage yard lines. We see that the success proportion was quite consistent for attempts at roughly the 47 yard line and under. However for field goal attempts over 47 yards, the success dropped significantly. Most kicks at these yard lines were unsuccessful.
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center', out.height='200px'}
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center' , out.height='180px'  }
 
 # Get proportion of true
 get_prop <- function(x){
@@ -324,11 +324,11 @@ data %>%
 
 We then take an overview of each team's field goal success rate by the starting yard line. This interactive visual can be found on the website. From the plot, we can see that the furthest successful kick attempts in 2018-2020 were between the 45-50 yard line and completed by the Dallas Cowboys (DAL) and the Carolina Panthers (CAR). Additionally, while most teams that attempted close field goal kicks (between the 0 to 5 yard line) scored 100% of their attempts, the Miami Dolphins (MIA) and Philadelphia Eagles (PHI) were less successful. The teams with the shortest max yard line successful kicks were the Minesota Vikings (MIN) and the New England Patriots (NE). Both teams's furthest successful kick were between the 30-35 yard line.
 
-From this, we investigate the field goal performance of each team by average starting yard line in a season. As this is an interactive visual, it can be viewed on the website. In this plot, each dot size corresponds to the number of field goal attempts made by each team in a season. Notice that the most season field goal success rates were above 65%. Moreover, we see that the Tennessee Titans (TEN) were significantly less successful in the 2019 season compared to all others NFL teams in all season between 2018 to 2020. In 2019, their success rate was only 33.33% with 15 attempts. From external knowledge, the Tennessee Titan’s main kicker was injured at this time and hence, was unable to play- leading the team to go through four different kickers with evidently little success. 
+From this, we investigate the field goal performance of each team by average starting yard line in a season. As this is an interactive visual, it can be viewed on the website. In this plot, each dot size corresponds to the number of field goal attempts made by each team in a season. Notice that the most season field goal success rates were above 65%. Moreover, we see that the Tennessee Titans (TEN) were significantly less successful in the 2019 season compared to all others NFL teams in all season between 2018 to 2020. In 2019, their success rate was only 33.33% with 15 attempts. From external knowledge, the Tennessee Titan’s main kicker was injured at this time and hence, was unable to play- leading the team to go through four different kickers with evidently little success. The best seasons for any team in terms of proportion of successful field goal attempts had 100% success rate. These seasons are: 2020 Pittsburgh Steelers (PIT)- average yard line of 18.1 with 21 attempts, 2020 Green Bay Packers (GB)- average yard line of 22 with 15 attempts, and 2020 Seattle Seahawks (SEA)- average yard line of 22.9 with 20 attempts.
 
 Taking a look at the summary table for kick length by special teams results, we can see that the mean of a "no good" kick or an unsuccessful kick (46.52 yards) was higher than that of a "good" kick or a successful kick (36.70). Moreover, the overall minimum kicking length was 19 yards and it was a successful kick; while the overall maximum kicking length attempt was 67 yards and was unsuccessful. We also note that there was only 1 downed kick and 1 out of bounds kick in all of the 2018-2020 seasons. 
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center', out.height='150px'}
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center' }
 # Summary of kick length by special teams result
 data_result <- data %>%
   group_by(specialTeamsResult) %>%
@@ -354,7 +354,7 @@ kbl(data_result,
 
 Next, we explore the kicking length by NFL teams in the 2018-2020 season. From the boxplot, the Denver Broncos (DEN) and Tennessee Titans (TEN) had the highest average kicking lengths at roughly 42 yards. The team with the lowest average kick length was the Las Vegas Raiders (LV) at roughly 35 yards.
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center', out.height='160px'}
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center'}
 # Kick Length by NFL Teams
 colour <- colorRampPalette(c("#C06C84", "#355C7D"))
 data %>%
@@ -374,9 +374,51 @@ data %>%
 ```
 
 
+Perhaps kickers who are taller and have longer legs would be able to kick further lengths? On that train of thought, we examine the plots of kick length vs. kicker height for successful and unsuccessul kicks. We see that for both kick results, the linear regression line is almost completely flat and the points do not follow a particular pattern. Hence, there is essentially no association between these a kicker's height and their kick length- whether the kick is successful or unsuccessful.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center'}
+
+# Kick length vs. Kicker Height
+ggplot(data, aes(y=kickLength, x=height_cm, color=specialTeamsSuccess)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  scale_color_manual("Special Teams Success", values=c("#c87e93", "#6b4b86")) +
+  labs(title = "Kick Length vs. Kicker Height") +
+  xlab("Height (cm)") +
+  ylab("Kick Length (yards)") +
+  theme_minimal() +
+  theme(
+     plot.title = element_text(color="#666666", size=15, face="bold", hjust = 0.5),
+    axis.title.x = element_text(color="#666666", size=11,face="bold"),
+    axis.title.y = element_text(color="#666666", size=11, face="bold")
+  )
+
+```
+
+Maybe kickers with more mass would have more power and would be able to kick longer lengths? With our data, we plot kick length vs. kicker weight for successful and unsuccessul kicks. From this, we also see that for both kick results, the linear regression line is almost completely flat and the points do not follow a particular pattern. Thus, there is no association between these a kicker's weight and their kick length- whether the kick is successful or unsuccessful.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center'}
+
+# Kick length vs. Kicker Weight
+ggplot(data, aes(y=kickLength, x=weight_kg, color=specialTeamsSuccess)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  scale_color_manual("Special Teams Success", values=c("#c87e93", "#6b4b86")) +
+  labs(title = "Kick Length vs. Kicker Weight") +
+  xlab("Weight (kg)") +
+  ylab("Kick Length (yards)") +
+  theme_minimal() +
+  theme(
+     plot.title = element_text(color="#666666", size=15, face="bold", hjust = 0.5),
+    axis.title.x = element_text(color="#666666", size=11,face="bold"),
+    axis.title.y = element_text(color="#666666", size=11, face="bold")
+  )
+
+```
+
 Next, we visualize the teams and their home stadiums on a map. This map is available on the website.
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center', out.height='200px'}
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center'  }
 
 # Map of NFL stadiums
 icon <- awesomeIcons(
@@ -461,15 +503,15 @@ teams_info %>%
 ```
 
 
-From examing the locations of the various team stadiums, we are interested in determining whether there is a change in average kick distance between plays in stadiums of high and low altitudes. In theory, high altitudes allows for better football performance since air pressure is lower and hence, the ball moves faster and straighter.
+From examining the locations of the various team stadiums, we are interested in determining whether there is a change in average kick distance between plays in stadiums of high and low altitudes. In theory, high altitudes allows for better football performance since air pressure is lower and hence, the ball moves faster and straighter.
 
-We use external resources to find the top 3 teams with stadiums at the highest and lowest altitudes:
+We use external resources to find the top 3 team stadiums at the highest and lowest altitudes:
 
 - Highest altitudes: Denver Broncos (DEN), Arizona Cardinals (ARI), Atlanta Falcons (ATL)
 
-- Lowest altitdues: New Orleans Saints (NO), New York Giants (NYG), New York Jets (NYJ)
+- Lowest altitudes: New Orleans Saints (NO), New York Giants (NYG), New York Jets (NYJ)
 
-Then, we'll filter for two groups: one with kicks from the top 3 highest altitude stadiums and one with kicks from the top 3 lowest altitude stadiums. Using a Mann–Whitney U test (otherwise known as a Wilcoxon 2-sample t-test), we check if there was a significant difference in kick lengths between these two independent groups.
+Then, we'll filter for two groups: one with kicks from the top 3 highest altitude stadiums and one with kicks from the top 3 lowest altitude stadiums. Using a Wilcoxon 2-sample t-test, we check if there was a significant difference in kick lengths between these two independent groups.
 
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
@@ -496,7 +538,7 @@ test["alternative"] <- "Two sided"
 test["p.value"] <- format(round(test$p.value, digits=2), nsmall = 2) 
 # Table for summary
 kbl(test, 
-    caption = "Mann–Whitney U test - High vs. Low Elevation", 
+    caption = "Wilcoxon 2-sample t-test - High vs. Low Elevation", 
     col.names = c("Statistic", "P-Value", "Method", "Alternative"),
     align='c',  booktabs = T) %>%
   kable_styling(bootstrap_options = c("striped"), full_width = F, font_size = 9, latex_options = "hold_position")
@@ -505,7 +547,7 @@ kbl(test,
 
 With a p-value of 0.10, there is very weak evidence supporting the alternative hypothesis that there is a significant difference in kick lengths between kicks in high altitude stadiums and kicks in low altitude stadiums.
 
-On top of that, we are also interested in whether teams performed better in terms of field goal success when they play home games vs. away games. For home games, players would have familarity with the field- seeing as that is where they usually practice. Additionally, morale would be higher at home games since they would have their home crowd cheering for them. This may help to boost their performance and hence, increase their success with field goals.
+On top of that, we are also interested in whether teams performed better in terms of field goal success when they play home games vs. away games. For home games, players would have familiarity with the field- seeing as that is where they usually practice. Additionally, morale would be higher at home games since they would have their home crowd cheering for them. This may help to boost their performance and hence, increase their success with field goals.
 
 We'll use a Wilcoxon signed-rank test to see if there was a significance difference in proportions of successful kicks for teams when playing home games vs. away games.
 
@@ -585,7 +627,7 @@ kbl(sum1_tidy,
 ```
 
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center', out.height='150px'}
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center' }
 
 ggplot(data_teams, aes(x=avg_kickLength, y=success_prop)) +
   geom_point() +
@@ -645,7 +687,7 @@ kbl(sum2_tidy,
 ```
 
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center', out.height='150px'}
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center' }
 
 ggplot(data_teams, aes(x=avg_kickLength, y=success_prop)) +
   geom_point() +
@@ -700,7 +742,7 @@ treefit <- rpart(specialTeamsSuccess~., method="anova", control=list(cp=0), data
 
 ```
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE, out.height='150px'}
+```{r, echo=FALSE, message=FALSE, warning=FALSE }
 
 optimalcp <- treefit$cptable[which.min(treefit$cptable[,"xerror"]), "CP"]
 
@@ -714,7 +756,7 @@ tree_pred <- predict(tree_prune, test)
 
 #### Bagging
 
-We then try a bagging model. From the variable importance plot, yardlineNumber has the highest importance. This follows from the results of our pruned tree- seeing that yardlineNumber was the only variable that the tree had split on. This makes sense as the larger the yard line number, the further away a kicker must start to kick the ball through the goal post. Surprisingly, game clock is the second most important variable. This may be because a big factor in kicking is performance under pressure. The closer the clock is to the end of the quarter, the more pressure there is for a team to score. While a kicker's job is under relatively similar conditions for most games, they may be under different amounts of pressure depending on the team's current stance. This mental warfare may cause a kicker to perform unexpectedly. 
+We then try a bagging model. From the variable importance plot, yardlineNumber has the highest importance. This follows from the results of our pruned tree- seeing that yardlineNumber was the only variable that the tree had split on. This makes sense as the larger the yard line number, the further away a kicker must start to kick the ball through the goal post. Surprisingly, game clock is the second most important variable. This may be because a big factor in kicking is performance under pressure. The closer the clock is to the end of the quarter, the more pressure there is for a team to score. While a kicker's job is under relatively similar physical conditions for most games, they may be under different amounts of pressure depending on the team's current stance. Pressure may play a determining role in a kicker's performance.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE, include=FALSE}
 
@@ -731,10 +773,10 @@ bag_pred <- predict(bag, test)
 
 ```
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE, out.height='200px'}
+```{r, echo=FALSE, message=FALSE, warning=FALSE  }
 colour <- colorRampPalette(c("#355C7D", "#C06C84"))
 
-bag_plot <- ggplot(imp, aes(x=reorder(varnames, IncNodePurity), weight=IncNodePurity)) + 
+ggplot(imp, aes(x=reorder(varnames, IncNodePurity), weight=IncNodePurity)) + 
   geom_bar(fill=colour(nrow(imp)), alpha = 0.7) +
   ylab("IncNodePurity") +
   xlab("Variable Name") +
@@ -771,10 +813,10 @@ rf_pred <- predict(rf, test)
 ```
 
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE, out.height='200px'}
+```{r, echo=FALSE, message=FALSE, warning=FALSE  }
 colour <- colorRampPalette(c("#355C7D", "#C06C84"))
 
-rf_plot <- ggplot(imp, aes(x=reorder(varnames, IncNodePurity), weight=IncNodePurity)) + 
+ggplot(imp, aes(x=reorder(varnames, IncNodePurity), weight=IncNodePurity)) + 
   geom_bar(fill=colour(nrow(imp)), alpha = 0.7) +
   ylab("IncNodePurity") +
   xlab("Variable Name") +
@@ -789,9 +831,6 @@ rf_plot <- ggplot(imp, aes(x=reorder(varnames, IncNodePurity), weight=IncNodePur
   )
 ```
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE, out.height='200px', out.width='350px'}
-grid.arrange(bag_plot, rf_plot, ncol=2)
-```
 
 
 #### Comparing the ML Models
@@ -820,7 +859,7 @@ tibble(`Method` = c("Pruned regression tree", "Bagging", "Random forest"),
 
 ## Conclusions and Summary
 
-Examining whether elevation is a factor in kicking length, we discovered through the Mann–Whitney U tes that there is weak evidence to support a significant difference in kick lengths between kicks performed in high altitude stadiums and kicks performed in low altitude stadiums. We also saw through the Wilcoxon signed-rank test that there was no significant difference in field goal success for team home games vs. away games. Moreover, investigating the association between kick lengths and kick outcomes, both models that we fitted suggests that an increase in kick length is associated with a decrease in successful kick attempts. This is consistent with our exploration- which suggests that the average kick length for successful kicks is lower than the average kick length for unsuccessful kicks. A possible explanation may be because of the increasing lack of accuracy when it comes to kicking longer lengths. Finally, in assessing whether or not a kick would be successful, coaches should place most importance on the starting yard line and also consider the game clock- as these variables were first and second respectively in importance among our ML models.
+Our exploratory plots inform us that overall average kick length is approximately 42 yards. We also discovered that there was no association between kick length and kicker weight or height for successful and unsuccessul kicks. Examining whether elevation is a factor in kicking length, we discovered through the Wilcoxon 2-sample t-test that there is weak evidence to support a significant difference in kick lengths between kicks performed in high altitude stadiums and kicks performed in low altitude stadiums. We also tested for a significant difference in field goal success for team home games vs. away games. However, there were no evidence suggesting a significant difference. Moreover, investigating the association between kick lengths and kick outcomes, both models that we fitted suggests that an increase in kick length is associated with a decrease in successful kick attempts. This is consistent with our exploration- which suggests that the average kick length for successful kicks is lower than the average kick length for unsuccessful kicks. A possible explanation may be because of the increasing lack of accuracy when it comes to kicking longer lengths. Finally, in assessing whether or not a kick would be successful, coaches should place most importance on the starting yard line and also consider the game clock- as these variables were first and second respectively in importance among our ML models.
 
 ### Limitations
 
