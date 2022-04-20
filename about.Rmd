@@ -1,0 +1,20 @@
+---
+title: "About"
+author: "Chloe Nguyen"
+date: "20/04/2022"
+output: html_document
+---
+
+<style>
+
+body {
+  background-color: #3e3f3a;
+}
+
+
+
+</style>
+
+```{r, echo=FALSE, out.width = '100%', class.source='landing'}
+knitr::include_graphics("assets/about.jpg")
+```

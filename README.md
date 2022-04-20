@@ -1,8 +1,10 @@
-# JSC370 HW5 Website
+# JSC370 Final Project: A Look into NFL Field Goals in 2018-2020
 
-This was completed for JSC370 HW5. Please visit the ['Visualizations' tab](https://annguyen1404.github.io/JSC370-HW5/jsc370_hw5.html) to see the HW5 visualizations.
+This project was completed as a part of the final assignment of JSC370, Data Science II, at the University of Toronto. The project website can be found at: 
 
-The aim of this project is to better learn and explore interactive visualizations- building off of the JSC370 midterm.
+## The Project
+
+This project provides an analysis on NFL field goal kicks of the 2018-2020 seasons. The aim of the project is to help football coaches  assess whether a field goal kick would be successful at a certain game moment to help determine their next game play.
 
 ## The Data
 
@@ -19,4 +21,4 @@ Team locations and names were retrieved from:
 
 ## Why Football Field Goals?
 
-The creator of this project, Chloe Nguyen, is particularly interested in the kicker position (and hence is interested in investigating more on football field goals for JSC370 projects) because it is the only reasonable football position she can potentially play- as a relatively small person who cannot throw or catch a football. Chloe is a (bandwaggon) Bengals fan and is still very devasted about their lost at the last Super Bowl. She is very excited that JSC370 has allowed her the opporunity to unite her interests of football and data science.
+The author of this project, Chloe Nguyen, is a big fan of American football and was very excited upon discovering that JSC370 allowed her the opporunity to unite her interests of football and data science. She was particularly interested in the kicker position (and hence was interested in investigating more on football field goals for the project) because it is the only reasonable football position she can potentially play- as a relatively small person who cannot throw or catch a football. Chloe is a (bandwaggon) Bengals fan and is still devasted over their loss at the last Super Bowl. 

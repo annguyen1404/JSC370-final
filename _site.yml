@@ -1,21 +1,25 @@
-name: "JSC370 HW5"
+name: "JSC370 Final"
 output_dir: "docs"
 navbar:
-  title: "JSC370 HW5: Interactive Visualization"
+  title: "<img id=\"logo\" style=\"width: 90px;\" src=\"assets/logo2.png\" />"
   author: "Chloe Nguyen"
   left:
-    - text: "About"
+    - text: "Home"
       href: index.html
-    - text: "Visualizations"
-      href: jsc370_hw5.html
+    - text: "Author"
+      href: about.html
+    - text: "Assignment"
+      href: https://github.com/JSC370/jsc370-2022/blob/main/15-final.pdf
   right:
     - icon: fa-github fa-lg
-      href: https://github.com/annguyen1404/JSC370-HW5
-    - text: "JSC370 Home"
-      href: https://jsc370.github.io/jsc370-2022/
+      href: https://github.com/annguyen1404/JSC370-final
+    - icon: fa-brands fa-youtube
+      href: https://drive.google.com/drive/folders/1duI8DXPaXU2uYFOgJt5PpI_0L3n_Vb-I?usp=sharing
+    - icon: fa-brands fa-linkedin
+      href: https://www.linkedin.com/in/chloe-maria-nguyen/
 output:
   html_document:
-    theme: cosmo
+    theme: sandstone
     include:
       after_body: footer.html
     css: styles.css

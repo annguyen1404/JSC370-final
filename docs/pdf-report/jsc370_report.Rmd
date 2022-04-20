@@ -1,42 +1,14 @@
 ---
-title: "NFL Field Goals in 2018 - 2020"
+title: "JSC370 Final: A Look at NFL Field Goals in 2018-2020"
 author: "Chloe Nguyen"
-output: html_document
+always_allow_html: yes
+output: pdf_document
 ---
 
+
 <style>
-
-body {
-  background-image: url('assets/back.jpg');
-  background-repeat: no-repeat;
-  background-size: 100% 7%;
-}
-
 .html-widget {
-  margin: auto;
-}
-
-h1 {
-  text-align: center;
-  font-family: "Arial";
-  font-weight: 600;
-}
-
-h1.title {
-    font-size: 0px;
-}
-
-h4.author {
-    font-size: 0px;
-}
-
-h5 {
-  text-align: center;
-}
-
-.nav-tabs{
-  margin-bottom: 5px;
-  padding-left: 27%;
+    margin: auto;
 }
 
 .marker-cluster-small {
@@ -58,189 +30,8 @@ background-color: rgba(162, 190, 215, 0.8);
 .marker-cluster-large div {
 background-color: rgba(53, 92, 125, 0.6);
 }
-
 </style>
 
-
-
-```{r, echo=FALSE, out.width = '100%', class.source='landing'}
-knitr::include_graphics("assets/landing.jpg")
-```
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-
-
-# OTHER MEDIAS
-
-##### A video walkthrough of this project can be found here: <br> https://drive.google.com/drive/folders/1duI8DXPaXU2uYFOgJt5PpI_0L3n_Vb-I?usp=sharing
-
-##### A pdf version of this analysis can be found here: <br> https://github.com/annguyen1404/JSC370-final
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-
-
-
-# ABOUT THE PROJECT {.tabset}
-
-## The Project
-
-##### This project provides an analysis on NFL field goal kicks of the 2018-2020 seasons. The aim of the project is to help football coaches  assess whether a field goal kick would be successful at a certain game moment to help determine their next game play.
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-
-## Why Football Field Goals?
-
-##### The author of this project, Chloe Nguyen, is a big fan of American football and was very excited upon discovering that JSC370 allowed her the opporunity to unite her interests of football and data science. She was particularly interested in the kicker position (and hence was interested in investigating more on football field goals for the project) because it is the only reasonable football position she can potentially play- as a relatively small person who cannot throw or catch a football. Chloe is a (bandwaggon) Bengals fan and is still devasted over their loss at the last Super Bowl. 
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-
-
-
-## The Assignment
-
-##### This project was completed as a part of the final assignment of JSC370, Data Science II, at the University of Toronto.
-
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-
-
-
-# THE ANALYSIS
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(fig.align='center')
@@ -262,18 +53,56 @@ library(randomForest)
 library(caret)
 library(gbm)
 library(gridExtra)
-library(plotly)
 
 ```
 
 
-```{r data-prep, echo=FALSE, message=FALSE, warning=FALSE}
+## Introduction
+
+In American football, two teams play to advance the football to the opposing side's end zone. Throughout the game, football coaches are heavily involved in calling plays and directing their players through the field. 
+	
+Arguably the most reliable method of scoring points in football is by kicking the ball through the crossbar. This is the job of a kicker- whose only role in the game is to kick. Unlike many other positions- such as wide receivers, where virtually every moment on the field is different- a kicker's game is one and the same. Because of that, kicks are typically seen as "safe" methods to score and teams rely on kickers to consistently make their shot. While kicking accounts for roughly a third of all NFL scores, because it's not considered as flashy in nature as other football plays, kicking is an immensely underappreciated aspect of the sport.
+	
+In this report, we will examine the factors that contribute to a field goal kick. The question we are interested in exploring is: what variables should football coaches focus on in determining whether a field goal kick would be successful? In particular, what variables are associated with the kicking length of a field goal and what is the relationship between kicking length and kicking attempt outcome? 
+	
+This project aims to help football coaches assess whether a field goal kick would be successful at a certain game moment to help determine their next game move.
+
+Before we dive into the analysis, we need to go over common football terminologies:
+
+- A field goal kick is considered 'good' or 'successful' if it managed to score 3 points- that is, the kick went through the goal post.
+
+- The 'starting yard line' or line-of-scrimmage is the line at which a play begins and the line at which the football is set for that play. 
+
+
+The repo link for this project is: https://github.com/annguyen1404/JSC370-final
+
+The website link for this project is: [LINK]
+
+
+## Methods
+
+### The Datasets
+
+The dataset we're working with details all special team plays (that is, plays that involve punts, kickoffs, field goals and extra points) in all National Football League (NFL) games from 2018 to 2020. This dataset was provided by the NFL as a part of their 2022 data competition, Big Data Bowl: [click for link](https://www.kaggle.com/c/nfl-big-data-bowl-2022/overview). We also refer to this dataset for the locations of NFL teams' home stadiums: [click for link](https://github.com/Sinbad311/CloudProject/blob/master/NFL%20Stadium%20Latitude%20and%20Longtitude.csv). Additionally, we use this dataset for the abbreviations of NFl teams:
+[click to link](https://gist.github.com/cnizzardini/13d0a072adb35a0d5817).
+
+
+### The Tools
+
+We'll use dplyr to help merge all datasets and create new variables. Additionally, we'll use ggplot to create all static plots, plotly for all interactive plots and leaflet for the map. We'll also use broom to tidy all raw outputs and to format all tables with kable. For loading in the image and coordinating the points of the football field plots, we'll use jpeg and grid.
+
+
+### Data Wrangling
+
+First, we merge the data of team abbreviations with team locations (longittude and lattitude) by teams. Note that there were NFL teams that changed their name throughout the years- such as the Washington Football Team who also went by the Washington Redskins. Hence, these names need to be modified to match for the datasets to be properly merged. Moreover, there were teams that recently moved to a different location (e.g. Las Vegas Raiders) and thus, we need to update their location to match their current state. We'll use external sources to check the new location of the team and input in this new value. 
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, include=FALSE}
 # Loading in and merging datasets
-teams_abbrev <- read_csv("data/nfl_abbrev.csv")
+teams_abbrev <- read_csv("../data/nfl_abbrev.csv")
 # Substring to get team
 teams_abbrev <- teams_abbrev %>%
   mutate(Team = sub('^(.+)[?=" "]', "", teams_abbrev$Name))
-teams_loc <- read_csv("data/nfl_locations.csv")
+teams_loc <- read_csv("../data/nfl_locations.csv")
 # Fix naming conventions and teams that moved
 teams_abbrev[teams_abbrev$Name=="Washington Football Team", "Team"] <- "Redskins"
 teams_abbrev[teams_abbrev$Name=="San Francisco 49ers", "Team"] <- "Forty-Niners"
@@ -285,9 +114,17 @@ teams_loc[teams_loc$Team=="Raiders", "latitude"] <- 36.0909
 teams_loc[teams_loc$Team=="Raiders", "zip"] <- 89118
 teams_info <- merge(x=teams_abbrev,y=teams_loc,by="Team")
 
+# Table for number of observations in dataset
+tibble(`Number of Rows` = c(nrow(teams_info)),
+       `Number of Columns` = c(ncol(teams_info))) %>%
+  kbl(caption = "Dimensions of Merged Dataset of NFL Team Abbreviations and Locations", align='c',  booktabs = T) %>%
+  kable_styling(bootstrap_options = c("striped"), full_width = F, font_size = 9, latex_options = "hold_position")
+```
 
+We then merge this dataset of team abbreviations and locations with the games data set by home team abbreviation to get the location of where each game was played. Once again, we have to fix team naming conventions so that they match up in order to merge the datasets. Next, we merge this new dataset with the game plays dataset by gameId. This gives us the game information and location of each game play. Again, we have to fix team naming conventions so that they match up in order to merge the datasets. Note that in this analysis, we want to only examine field goals, so we'll filter for plays that are 'Field Goal'.
 
-games <- read_csv("data/games.csv")
+```{r, echo=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+games <- read_csv("../data/games.csv")
 # Fix naming conventions
 games[games$homeTeamAbbr=="LA", "homeTeamAbbr"] <- "LAR"
 games[games$visitorTeamAbbr=="LA", "visitorTeamAbbr"] <- "LAR"
@@ -296,20 +133,41 @@ games[games$visitorTeamAbbr=="OAK", "visitorTeamAbbr"] <- "LV"
 
 team_games <- merge(x=games,y=teams_info,by.x="homeTeamAbbr", by.y="Abbreviation", all.x=T)
 
+# Table for number of observations in datasets
+tibble(`Datasets`= c("Games", "Merged"),
+       `Number of Rows` = c(nrow(games), nrow(team_games))) %>%
+  kbl(caption = "Number of Observations in Datasets", align='c',  booktabs = T) %>%
+  kable_styling(bootstrap_options = c("striped"), full_width = F, font_size = 9, latex_options = "hold_position")
 
-plays <- read_csv("data/plays.csv")
+```
+
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+
+plays <- read_csv("../data/plays.csv")
 # Fix naming conventions
 plays[plays$possessionTeam=="LA", "possessionTeam"] <- "LAR"
 plays[plays$possessionTeam=="OAK", "possessionTeam"] <- "LV"
 
 data <- merge(x=plays,y=team_games, by="gameId", all.x=T)
 
+# Table for number of observations in datasets
+tibble(`Datasets`= c("Game Plays", "Merged"),
+       `Number of Rows` = c(nrow(plays), nrow(data))) %>%
+  kbl(caption = "Number of Observations in Datasets", align='c',  booktabs = T) %>%
+  kable_styling(bootstrap_options = c("striped"), full_width = F, font_size = 9, latex_options = "hold_position")
+```
 
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, include=FALSE}
 data <- data %>%
   filter(specialTeamsPlayType=='Field Goal')
+```
 
+Additionally, we merge this new dataset of field goal plays with a dataset of players by kickerId to get more information on the athlete who kicked the ball in each game play. However, before the merge, we need to standardize entries in the players dataset. Since the entries of height for this dataset are partially recorded in just inches and partially recorded in both feet and inches, we convert all entries of height to cm. We also convert all entries of weight to kg. Next, we convert all birth dates to Date objects. For this variable, some entries have the year listed first and some have the year listed last. To standardize, we match date entries by regex to get the date formate in order to convert them to Dates. For example, the regex "-[0-9]{4}$" checks that the year is formatted first and hence, we are able to create our Date object approporiately.
 
-players <- read_csv("data/players.csv")
+```{r, echo=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+players <- read_csv("../data/players.csv")
 
 # Convert height in text of feet and inches to cm
 players <- players %>% separate(height, c('feet', 'inches'), "-", convert=TRUE, remove = FALSE) %>%
@@ -334,10 +192,24 @@ players_b <- players %>%
 
 players <- rbind(players_a, players_b)
 
+```
 
 
+```{r, echo=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+old_rows <- nrow(data)
 data <- merge(x=data,y=players,by.x="kickerId", by.y="nflId", all.x=T)
 
+# Table for number of observations in datasets
+tibble(`Datasets`= c("Field Goal Plays", "Merged"),
+       `Number of Rows` = c(old_rows, nrow(data))) %>%
+  kbl(caption = "Number of Observations in Datasets", align='c',  booktabs = T) %>%
+  kable_styling(bootstrap_options = c("striped"), full_width = F, font_size = 9, latex_options = "hold_position")
+
+```
+
+Now, we select the variables relevant to our question of interest: season, week, gameDate, gameTimeEastern, longitude, latitude, homeTeamAbbr, visitorTeamAbbr, quarter, down, specialTeamsPlayType, specialTeamsResult, possessionTeam, yardlineNumber, gameClock, kickLength, kickerId, height_cm, weight_kg, birthDate, displayName, collegeName, Position. With that, we create the following variables of interest: the birth year of player kicking the ball (birthYear), the age of player at the time of kick (age), whether or not the kick attempt was classified as "good" (specialTeamsSuccess), whether or not the team in posession of the ball is the home team (possessionTeamHome). Finally, we impute missing values for relevant variables. Note that we use the mean for numerical values and the median for categorical values. The dataset is now ready to be explored.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, include=FALSE}
 
 # Select relevant variables
 data <- data%>%
@@ -352,82 +224,12 @@ data <- data %>%
   mutate(possessionTeamHome=ifelse(possessionTeam==homeTeamAbbr, T, F))
 
 data <- data.table(data)
-
 ```
 
 
-<br>
-<br>
-<br>
-
-## Introduction
-
-In American football, two teams play to advance the football to the opposing side's end zone. Throughout the game, football coaches are heavily involved in calling plays and directing their players through the field. 
-	
-Arguably the most reliable method of scoring points in football is by kicking the ball through the crossbar. This is the job of a kicker- whose only role in the game is to kick. Unlike many other positions- such as wide receivers, where virtually every moment on the field is different- a kicker's game is one and the same. Because of that, kicks are typically seen as "safe" methods to score and teams rely on kickers to consistently make their shot. While kicking accounts for roughly a third of all NFL scores, because it's not considered as flashy in nature as other football plays, kicking is an immensely underappreciated aspect of the sport.
-	
-In this report, we will examine the factors that contribute to a field goal kick. The question we are interested in exploring is: what variables should football coaches focus on in determining whether a field goal kick would be successful? In particular, what variables are associated with the kicking length of a field goal and what is the relationship between kicking length and kicking attempt outcome? 
-	
-This project aims to help football coaches  assess whether a field goal kick would be successful at a certain game moment to help determine their next game move.
-
-Before we dive into the analysis, we need to go over common football terminologies:
-
-- A field goal kick is considered 'good' or 'successful' if it managed to score 3 points- that is, the kick went through the goal post.
-
-- The 'starting yard line' or line-of-scrimmage is the line at which a play begins and the line at which the football is set for that play. 
 
 
-<br>
-<br>
-<br>
-
-## Methods
-
-<br>
-
-### The Datasets
-
-The dataset we're working with details all special team plays (that is, plays that involve punts, kickoffs, field goals and extra points) in all National Football League (NFL) games from 2018 to 2020. This dataset was provided by the NFL as a part of their 2022 data competition, Big Data Bowl: https://www.kaggle.com/c/nfl-big-data-bowl-2022/overview 
-
-We also refer to this dataset for the locations of NFL teams' home stadiums: https://github.com/Sinbad311/CloudProject/blob/master/NFL%20Stadium%20Latitude%20and%20Longtitude.csv
-
-Additionally, we use this dataset for the abbreviations of NFl teams: https://gist.github.com/cnizzardini/13d0a072adb35a0d5817
-
-<br>
-
-### The Tools
-
-We'll use dplyr to help merge all datasets and create new variables. Additionally, we'll use ggplot to create all static plots, plotly for all interactive plots and leaflet for the map. We'll also use broom to tidy all raw outputs and to format all tables with kable. For loading in the image and coordinating the points of the football field plots, we'll use jpeg and grid.
-
-<br>
-
-### Data Wrangling
-
-First, we merge the data of team abbreviations with team locations (longittude and lattitude) by teams. Note that there were NFL teams that changed their name throughout the years- such as the Washington Football Team who also went by the Washington Redskins. Hence, these names need to be modified to match for the datasets to be properly merged. Moreover, there were teams that recently moved to a different location (e.g. Las Vegas Raiders) and thus, we need to update their location to match their current state. We'll use external sources to check the new location of the team and input in this new value. 
-
-We then merge this dataset of team abbreviations and locations with the games data set by home team abbreviation to get the location of where each game was played. Once again, we have to fix team naming conventions so that they match up in order to merge the datasets. Next, we merge this new dataset with the game plays dataset by gameId. This gives us the game information and location of each game play. Again, we have to fix team naming conventions so that they match up in order to merge the datasets. Note that in this analysis, we want to only examine field goals, so we'll filter for plays that are 'Field Goal'.
-
-Additionally, we merge this new dataset of field goal plays with a dataset of players by kickerId to get more information on the athlete who kicked the ball in each game play. However, before the merge, we need to standardize entries in the players dataset. Since the entries of height for this dataset are partially recorded in just inches and partially recorded in both feet and inches, we convert all entries of height to cm. We also convert all entries of weight to kg. Next, we convert all birth dates to Date objects. For this variable, some entries have the year listed first and some have the year listed last. To standardize, we match date entries by regex to get the date formate in order to convert them to Dates. For example, the regex "-[0-9]{4}$" checks that the year is formatted first and hence, we are able to create our Date object approporiately.
-
-Now, we select the variables relevant to our question of interest: season, week, gameDate, gameTimeEastern, longitude, latitude, homeTeamAbbr, visitorTeamAbbr, quarter, down, specialTeamsPlayType, specialTeamsResult, possessionTeam, yardlineNumber, gameClock, kickLength, kickerId, height_cm, weight_kg, birthDate, displayName, collegeName, Position. 
-
-With that, we created the following variables of interest:
-
-- birthYear: The year that the player kicking the ball was born
-
-- age: The age of the player at the time of kick
-
-- specialTeamsSuccess: Whether or not the kick attempt was classified as "good"
-
-- possessionTeamHome: Whether or not the team in posession of the ball is the home team
-
-<br>
-
-## Exploring the Variables
-
-We first take a look at all the variables of the final dataset that we are working with, their types, whether they are numerical or categorical and the number of missing entires they have. 
-
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE, include=FALSE}
 # Numerical variables
 numerical_vars <- c("season", "week", "gameDate", "gameTimeEastern", "longitude", "latitude", "yardlineNumber", "gameClock", "kickLength", "height_cm", "weight_kg", "birthDate", "down", "quarter", "kickerId", "age")
 
@@ -440,11 +242,9 @@ tibble(`Column` = colnames(data),
        Type = data_type,
        `Numerical or Categorical`= data_numcat,
        `Number of NAs` = sapply(data, function(x) sum(is.na(x)))) %>%
-  kbl(caption = "<strong><center>Overview of Variables<center><strong>") %>%
-  kable_styling(bootstrap_options = c("striped", "hover"), full_width = F)
+  kbl(caption = "Overview of Variables") %>%
+  kable_styling(bootstrap_options = c("striped", "hover"), full_width = F, font_size = 9, latex_options = "hold_position")
 ```
-
-After that, we impute missing values for relevant variables. Note that we use the mean for numerical values and the median for categorical values.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 # Impute missing values for relevant variables. Note that we use mean for numerical values and median for categorical values.
@@ -461,19 +261,12 @@ data[, kickLength := fcoalesce(kickLength, mean(kickLength, na.rm = TRUE)),
  by = .(possessionTeam, season)]
 ```
 
-The dataset is now ready to be explored.
-
-<br>
-<br>
-<br>
 
 ## Results
 
-First, we visualise kicking locations by viewing a plot of the line-of-scrimmage of field goal attempts. From the plot we see that most attempts were roughly from the 20 yard line. Additionally, we also discover that the number of field goal attempts significantly dropped at around the 40 yard line and further.
-
-```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center'}
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center', out.height='200px'}
 # Load in image of football field
-field <- readJPEG("assets/field.jpg")
+field <- readJPEG("../assets/field.jpg")
 field <- rasterGrob(field, width=unit(1,"npc"), height=unit(1,"npc"))
 
 # Gets count
@@ -499,11 +292,11 @@ data %>%
 
 ```
 
-<br>
+First, we visualise kicking locations by viewing a plot of the line-of-scrimmage of field goal attempts. From the plot we see that most attempts were roughly from the 20 yard line. Additionally, we also discover that the number of field goal attempts significantly dropped at around the 40 yard line and further.
 
 Next, we take a look at the proportion of successful kicks at various line-of-scrimmage yard lines. We see that the success proportion was quite consistent for attempts at roughly the 47 yard line and under. However for field goal attempts over 47 yards, the success dropped significantly. Most kicks at these yard lines were unsuccessful.
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center'}
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center', out.height='200px'}
 
 # Get proportion of true
 get_prop <- function(x){
@@ -529,79 +322,13 @@ data %>%
 
 ```
 
-<br>
+We then take an overview of each team's field goal success rate by the starting yard line. This interactive visual can be found on the website. From the plot, we can see that the furthest successful kick attempts in 2018-2020 were between the 45-50 yard line and completed by the Dallas Cowboys (DAL) and the Carolina Panthers (CAR). Additionally, while most teams that attempted close field goal kicks (between the 0 to 5 yard line) scored 100% of their attempts, the Miami Dolphins (MIA) and Philadelphia Eagles (PHI) were less successful. The teams with the shortest max yard line successful kicks were the Minesota Vikings (MIN) and the New England Patriots (NE). Both teams's furthest successful kick were between the 30-35 yard line.
 
-We then take an overview of each team's field goal success rate by the starting yard line. From the plot, we can see that the furthest successful kick attempts in 2018-2020 were between the 45-50 yard line and completed by the Dallas Cowboys (DAL) and the Carolina Panthers (CAR). Additionally, while most teams that attempted close field goal kicks (between the 0 to 5 yard line) scored 100% of their attempts, the Miami Dolphins (MIA) and Philadelphia Eagles (PHI) were less successful. The teams with the shortest max yard line successful kicks were the Minesota Vikings (MIN) and the New England Patriots (NE). Both teams's furthest successful kick were between the 30-35 yard line.
-
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
-
-data <- data %>%
-  mutate(yardlineInt = (findInterval(yardlineNumber, seq(0, 60, 5))-0.5)*5)
-
-data_yardline <- data %>%
-  group_by(yardlineInt, possessionTeam) %>%
-  summarise (
-    attempts = n(),
-    prop_success = mean(specialTeamsSuccess))
-
-
-
-
-data_yardline %>%
-  plot_ly(x=~yardlineInt, y=~possessionTeam, z=~prop_success, type="heatmap",
-          colorbar= list(title='Success Rate'),
-          hoverinfo = 'text',
-            text = ~paste("Team:", data_yardline$possessionTeam,
-                          "<br> Yard Line:", data_yardline$yardlineInt-2.5, "to",
-                          data_yardline$yardlineInt+2.5,
-                          "<br> Success Rate:", round(data_yardline$prop_success, 2),
-                          "<br> Attempts:", data_yardline$attempts)) %>%
-  layout(title="Field Goal Attempt Success Rate by Yard Line per Team in 2018-2020", 
-         yaxis=list(title="NFL Teams", autorange="reversed", dtick=1),
-         xaxis=list(title="Yard Line"),
-         hovermode="compare") 
-
-
-```
-
-
-<br>
-
-From this, we investigate the field goal performance of each team by average starting yard line in a season. In this plot, each dot size corresponds to the number of field goal attempts made by each team in a season. Notice that the most season field goal success rates were above 65%. Moreover, we see that the Tennessee Titans (TEN) were significantly less successful in the 2019 season compared to all others NFL teams in all season between 2018 to 2020. In 2019, their success rate was only 33.33% with 15 attempts. From external knowledge, the Tennessee Titan’s main kicker was injured at this time and hence, was unable to play- leading the team to go through four different kickers with evidently little success. The best seasons for any team in terms of proportion of successful field goal attempts had 100% success rate. These seasons are: 2020 Pittsburgh Steelers (PIT)- average yard line of 18.1 with 21 attempts, 2020 Green Bay Packers (GB)- average yard line of 22 with 15 attempts, and 2020 Seattle Seahawks (SEA)- average yard line of 22.9 with 20 attempts.
-
-
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
-
-data_team_season <- data %>%
-  group_by(possessionTeam, season) %>%
-  summarise (
-    attempts = n(),
-    prop_success = mean(specialTeamsSuccess),
-    avg_yardline = mean(yardlineNumber))
-
-data_team_season %>%
-  plot_ly(x=~avg_yardline, y=~prop_success, type='scatter',
-          mode="markers", color=~possessionTeam,
-          size=~attempts, sizes = c(5, 70), marker=list(sizemode='diameter', opacity = 0.5),
-          hover_info="text",
-          text = ~paste(paste0("Team: ", possessionTeam),
-                        paste0("Season: ", season),
-                        paste0("Number of Attempts: ", attempts),
-                        paste0("Proportion of Successful Kicks: ", round(prop_success, 2)),
-                        paste0("Average Yard Line: ", round(avg_yardline, 2)),
-                        sep="<br>"))  %>%
-  layout(title="Average Yard Line vs. Proportion of Successful Kicks <br> by Teams Each Season (2018-2020)", 
-         yaxis=list(title="Proportion of Successful Kicks"),
-         xaxis=list(title="Average Yard Line"),
-         hovermode="compare")
-
-```
-
-<br>
+From this, we investigate the field goal performance of each team by average starting yard line in a season. As this is an interactive visual, it can be viewed on the website. In this plot, each dot size corresponds to the number of field goal attempts made by each team in a season. Notice that the most season field goal success rates were above 65%. Moreover, we see that the Tennessee Titans (TEN) were significantly less successful in the 2019 season compared to all others NFL teams in all season between 2018 to 2020. In 2019, their success rate was only 33.33% with 15 attempts. From external knowledge, the Tennessee Titan’s main kicker was injured at this time and hence, was unable to play- leading the team to go through four different kickers with evidently little success. 
 
 Taking a look at the summary table for kick length by special teams results, we can see that the mean of a "no good" kick or an unsuccessful kick (46.52 yards) was higher than that of a "good" kick or a successful kick (36.70). Moreover, the overall minimum kicking length was 19 yards and it was a successful kick; while the overall maximum kicking length attempt was 67 yards and was unsuccessful. We also note that there was only 1 downed kick and 1 out of bounds kick in all of the 2018-2020 seasons. 
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center'}
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center', out.height='150px'}
 # Summary of kick length by special teams result
 data_result <- data %>%
   group_by(specialTeamsResult) %>%
@@ -617,17 +344,17 @@ kbl(data_result,
     caption = "Summary of Kick Length by Special Team Result", 
     col.names = c("Special Teams Result", "Min", "Max", "Mean", 
                   "Standard Deviation","Range"),
-    align='c',
+    align='c',  booktabs = T,
     digits=2) %>%
-  kable_styling(bootstrap_options = c("striped", "hover"), full_width = F)
+  kable_styling(bootstrap_options = c("striped", "hover"), full_width = F, font_size = 9, latex_options = "hold_position")
   
 ```
 
-<br>
+
 
 Next, we explore the kicking length by NFL teams in the 2018-2020 season. From the boxplot, the Denver Broncos (DEN) and Tennessee Titans (TEN) had the highest average kicking lengths at roughly 42 yards. The team with the lowest average kick length was the Las Vegas Raiders (LV) at roughly 35 yards.
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center'}
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center', out.height='160px'}
 # Kick Length by NFL Teams
 colour <- colorRampPalette(c("#C06C84", "#355C7D"))
 data %>%
@@ -641,34 +368,15 @@ data %>%
   theme(
      plot.title = element_text(color="#666666", size=15, face="bold", hjust = 0.5),
     axis.title.x = element_text(color="#666666", size=11,face="bold"),
-    axis.title.y = element_text(color="#666666", size=11, face="bold")
+    axis.title.y = element_text(color="#666666", size=11, face="bold"),
+     plot.margin=grid::unit(c(0,0,0,0), "mm")
   )
 ```
 
-<br>
 
-Moving on, we further examine the kick length of successful and unsuccessful field goal attempts for every team. We see that the median kicking length of every team is higher for successful kicks than for unsuccessful kicks. Of the successful kicks, the Denver Broncos (DEN) has the highest kick length median at roughly 40 yards. The lowest median for successful kicks belongs to the Las Vegas Raiders (LV) at 33 yards. 
+Next, we visualize the teams and their home stadiums on a map. This map is available on the website.
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
-
-data %>% plot_ly(
-  y = ~kickLength,
-  x = ~possessionTeam,
-  color = ~specialTeamsSuccess,
-  type = "box"
-) %>%
-  layout(title="Kick Length of Successful and Unsuccessful Field Goal Attempts \n per Team for 2018-2020",
-         yaxis=list(title="Kick length (yards)"),
-         xaxis=list(title="Team"),
-         legend=list(title=list(text='Successful Kicks')),
-         hovermode="compare")
-```
-
-<br>
-
-Next, we visualize the teams and their home stadiums on a map.
-
-```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center'}
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center', out.height='200px'}
 
 # Map of NFL stadiums
 icon <- awesomeIcons(
@@ -753,8 +461,6 @@ teams_info %>%
 ```
 
 
-<br>
-
 From examing the locations of the various team stadiums, we are interested in determining whether there is a change in average kick distance between plays in stadiums of high and low altitudes. In theory, high altitudes allows for better football performance since air pressure is lower and hence, the ball moves faster and straighter.
 
 We use external resources to find the top 3 teams with stadiums at the highest and lowest altitudes:
@@ -764,6 +470,7 @@ We use external resources to find the top 3 teams with stadiums at the highest a
 - Lowest altitdues: New Orleans Saints (NO), New York Giants (NYG), New York Jets (NYJ)
 
 Then, we'll filter for two groups: one with kicks from the top 3 highest altitude stadiums and one with kicks from the top 3 lowest altitude stadiums. Using a Mann–Whitney U test (otherwise known as a Wilcoxon 2-sample t-test), we check if there was a significant difference in kick lengths between these two independent groups.
+
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 data_high_elev <- data %>%
@@ -792,13 +499,11 @@ kbl(test,
     caption = "Mann–Whitney U test - High vs. Low Elevation", 
     col.names = c("Statistic", "P-Value", "Method", "Alternative"),
     align='c',  booktabs = T) %>%
-  kable_styling(bootstrap_options = c("striped"), full_width = F , latex_options = "hold_position")
+  kable_styling(bootstrap_options = c("striped"), full_width = F, font_size = 9, latex_options = "hold_position")
 
 ```
 
 With a p-value of 0.10, there is very weak evidence supporting the alternative hypothesis that there is a significant difference in kick lengths between kicks in high altitude stadiums and kicks in low altitude stadiums.
-
-<br>
 
 On top of that, we are also interested in whether teams performed better in terms of field goal success when they play home games vs. away games. For home games, players would have familarity with the field- seeing as that is where they usually practice. Additionally, morale would be higher at home games since they would have their home crowd cheering for them. This may help to boost their performance and hence, increase their success with field goals.
 
@@ -831,20 +536,18 @@ kbl(test,
     caption = "Wilcoxon signed-rank test - Home vs. Away", 
     col.names = c("Statistic", "P-Value", "Method", "Alternative"),
     align='c',  booktabs = T) %>%
-  kable_styling(bootstrap_options = c("striped"), full_width = F , latex_options = "hold_position")
+  kable_styling(bootstrap_options = c("striped"), full_width = F, font_size = 9, latex_options = "hold_position")
+
 ```
 
 With a large p-value of 0.44, we cannot reject the null hypothesis that there was no significant difference in proportion of successful kicks between home games and away games. This result is not too surprising seeing that the most important characteristic that NFL teams look for when signing their kicker is consistency. Teams want kickers who they can count on to score regardless of whether they are playing home games or an away games since field goals are considered a "safe" method of scoring.
 
-<br>
 
 ### Modelling
 
 To begin, we group our data of game plays by posessionTeam (the team that is kicking the ball) and season. In the process, we summarise to find: the proportion of successful kick attempts (success_prop), the average height of the kicker (avg_height), the average weight of the kicker (avg_weight), the average age at time of kick of the kicker (avg_age), the proportion of these kicks that were done during a home game (home_prop), the average kick length in yards (avg_kickLength).
 
 To evaluate the relationship between kick length and successful kicking attempts and to explore the association of other factors in a successful kick, we'll fit 2 models to this grouped data. The first model is a multiple linear regression (MLR) model for success_prop with predictors: avg_height, avg_weight, avg_age, home_prop and avg_kickLength. The second model uses cubic regression spline and only takes into account avg_kickLength.
-
-<br>
 
 #### Multiple Linear Regression Model
 
@@ -879,14 +582,10 @@ kbl(sum1_tidy,
     align='c',  booktabs = T) %>%
   kable_styling(bootstrap_options = c("striped", "hover"), full_width = F, latex_options = "hold_position")
 
-tibble(`R Squared` = sum1$r.squared,
-       `Adjusted R Squared` = sum1$adj.r.squared) %>%
-  kbl(caption = "Model Summary - R Squared and Adjusted R Squared", align='c',  booktabs = T) %>%
-  kable_styling(bootstrap_options = c("striped"), full_width = F , latex_options = "hold_position")
-
 ```
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center'}
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center', out.height='150px'}
 
 ggplot(data_teams, aes(x=avg_kickLength, y=success_prop)) +
   geom_point() +
@@ -906,10 +605,13 @@ ggplot(data_teams, aes(x=avg_kickLength, y=success_prop)) +
   )
 
 
+tibble(`R Squared` = sum1$r.squared,
+       `Adjusted R Squared` = sum1$adj.r.squared) %>%
+  kbl(caption = "Model Summary - R Squared and Adjusted R Squared", align='c',  booktabs = T) %>%
+  kable_styling(bootstrap_options = c("striped"), full_width = F, font_size = 9, latex_options = "hold_position")
+
 ```
 
-
-<br>
 
 #### Model with Cubic Regression Spline
 
@@ -932,23 +634,18 @@ tibble(`Estimate` = sum2$p.coeff,
        `T Value` = sum2$p.t,
        `P-Value` = sum2$p.pv) %>%
   kbl(caption = "Model Summary - Parametric Coefficients", align='c',  booktabs = T) %>%
-  kable_styling(bootstrap_options = c("striped"), full_width = F , latex_options = "hold_position")
+  kable_styling(bootstrap_options = c("striped"), full_width = F, font_size = 9, latex_options = "hold_position")
 
 kbl(sum2_tidy,
     caption = "Model Summary - Smooth Terms",
     col.names = c("Term", "Estimated Degree of Freedom", "Reference Degree of Freedom", "Statistic", "P-Value"),
     align='c',  booktabs = T) %>%
-  kable_styling(bootstrap_options = c("striped"), full_width = F , latex_options = "hold_position")
-
-tibble(`Adjusted R Squared` = sum2$r.sq,
-       `Deviance Explained` = sum2$dev.expl) %>%
-  kbl(caption = "Model Summary - Adjusted R Squared and Deviance Explained", align='c',  booktabs = T) %>%
-  kable_styling(bootstrap_options = c("striped"), full_width = F , latex_options = "hold_position")
+  kable_styling(bootstrap_options = c("striped"), full_width = F, font_size = 9, latex_options = "hold_position")
 
 ```
 
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center'}
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center', out.height='150px'}
 
 ggplot(data_teams, aes(x=avg_kickLength, y=success_prop)) +
   geom_point() +
@@ -965,19 +662,22 @@ ggplot(data_teams, aes(x=avg_kickLength, y=success_prop)) +
     axis.title.y = element_text(color="#666666", size=11, face="bold"),
      plot.margin=grid::unit(c(0,0,0,0), "mm")
   )
+
+tibble(`Adjusted R Squared` = sum2$r.sq,
+       `Deviance Explained` = sum2$dev.expl) %>%
+  kbl(caption = "Model Summary - Adjusted R Squared and Deviance Explained", align='c',  booktabs = T) %>%
+  kable_styling(bootstrap_options = c("striped"), full_width = F, font_size = 9, latex_options = "hold_position")
     
 
 ```
 
-
-<br>
 
 ### Predicting
 
 Using ML, we attempt to predict whether or not a kick is successful with the following variables:
 season, week, gameTimeEastern, longitude, latitude, homeTeamAbbr, visitorTeamAbbr, quarter, down, posessionTeam, gameClock, heigh_cm, weight_kg, age, posessionTeamHome
 
-This section aims to help coaches  assess the likeliness of a kick being successful at a certain point during a football game. Hence the predictor variables chosen are all variables that coaches would have  assess to during a game. Through the variable importance plots, we hope to give coaches a better sense of what variables to pay attention to when deciding whether or not a kick will be successful and hence, help to determine whether or not coaches should call for field goal kick plays.
+This section aims to help coaches assess the likeliness of a kick being successful at a certain point during a football game. Hence the predictor variables chosen are all variables that coaches would have assess to during a game. Through the variable importance plots, we hope to give coaches a better sense of what variables to pay attention to when deciding whether or not a kick will be successful and hence, help to determine whether or not coaches should call for field goal kick plays.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
  # Split data into train and test
@@ -990,8 +690,6 @@ test <- data[-train_idx,] %>%
 
 ```
 
-<br>
-
 #### Pruned Tree
 
 The first model we'll fit is a decision tree. We will prune this tree so that it is not overly complicated. Note that the optimal complexity parameter was the determined by looking for the minimum 'xerror'. The pruned tree splits on only a single variable, yardlineNumber. From this tree, 34% of kicks starts at yard line 26 or more and have a success probability of 66%. Additionally, 66% of kicks start at yard line less than 26 and have a success probability of 99%.
@@ -1002,7 +700,7 @@ treefit <- rpart(specialTeamsSuccess~., method="anova", control=list(cp=0), data
 
 ```
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE, out.height='150px'}
 
 optimalcp <- treefit$cptable[which.min(treefit$cptable[,"xerror"]), "CP"]
 
@@ -1013,8 +711,6 @@ rpart.plot(tree_prune)
 tree_pred <- predict(tree_prune, test)
 
 ```
-
-<br>
 
 #### Bagging
 
@@ -1027,7 +723,7 @@ num_vars <- ncol(train)-1
 bag <- randomForest(specialTeamsSuccess~., data=train, mtry=num_vars, na.action=na.omit)
 imp <- varImpPlot(bag, n.var=num_vars)
 imp <- as.data.frame(imp)
-imp$varnames <- rownames(imp) # row names to column
+imp$varnames <- rownames(imp) 
 rownames(imp) <- NULL  
 
 # Predicting
@@ -1035,24 +731,23 @@ bag_pred <- predict(bag, test)
 
 ```
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE, out.height='200px'}
 colour <- colorRampPalette(c("#355C7D", "#C06C84"))
 
-ggplot(imp, aes(x=reorder(varnames, IncNodePurity), weight=IncNodePurity)) + 
+bag_plot <- ggplot(imp, aes(x=reorder(varnames, IncNodePurity), weight=IncNodePurity)) + 
   geom_bar(fill=colour(nrow(imp)), alpha = 0.7) +
   ylab("IncNodePurity") +
   xlab("Variable Name") +
   coord_flip() +
-  labs(title = "Bagging - Variable Importance") +
+  labs(title = "Bagging \n Variable \n Importance") +
   theme_minimal() +
   theme(
      plot.title = element_text(color="#666666", size=15, face="bold", hjust = 0.5),
     axis.title.x = element_text(color="#666666", size=11,face="bold"),
-    axis.title.y = element_text(color="#666666", size=11, face="bold")
+    axis.title.y = element_text(color="#666666", size=11, face="bold"),
+     plot.margin=grid::unit(c(0,0,0,0), "mm")
   )
 ```
-
-<br>
 
 #### Random Forest
 
@@ -1065,34 +760,39 @@ rf <- randomForest(specialTeamsSuccess~., data=train, na.action=na.omit)
 
 imp <- varImpPlot(rf, n.var=num_vars)
 imp <- as.data.frame(imp)
-imp$varnames <- rownames(imp) # row names to column
+imp$varnames <- rownames(imp) 
 rownames(imp) <- NULL  
 
 # Predicting
 rf_pred <- predict(rf, test)
 
+
+
 ```
 
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE, out.height='200px'}
 colour <- colorRampPalette(c("#355C7D", "#C06C84"))
 
-ggplot(imp, aes(x=reorder(varnames, IncNodePurity), weight=IncNodePurity)) + 
+rf_plot <- ggplot(imp, aes(x=reorder(varnames, IncNodePurity), weight=IncNodePurity)) + 
   geom_bar(fill=colour(nrow(imp)), alpha = 0.7) +
   ylab("IncNodePurity") +
   xlab("Variable Name") +
   coord_flip() +
-  labs(title = "Random Forest - Variable Importance") +
+  labs(title = "Random Forest \n Variable \nImportance") +
   theme_minimal() +
   theme(
      plot.title = element_text(color="#666666", size=15, face="bold", hjust = 0.5),
     axis.title.x = element_text(color="#666666", size=11,face="bold"),
-    axis.title.y = element_text(color="#666666", size=11, face="bold")
+    axis.title.y = element_text(color="#666666", size=11, face="bold"),
+     plot.margin=grid::unit(c(0,0,0,0), "mm")
   )
 ```
 
+```{r, echo=FALSE, message=FALSE, warning=FALSE, out.height='200px', out.width='350px'}
+grid.arrange(bag_plot, rf_plot, ncol=2)
+```
 
-<br>
 
 #### Comparing the ML Models
 
@@ -1113,29 +813,15 @@ rf_mse <- mean((rf_pred - test$specialTeamsSuccess)^2, na.rm = TRUE)
 tibble(`Method` = c("Pruned regression tree", "Bagging", "Random forest"),
        `MSE` = c(tree_mse, bag_mse, rf_mse))%>%
   kbl(caption = "Comparing MSE", align='c',  booktabs = T) %>%
-  kable_styling(bootstrap_options = c("striped"), full_width = F , latex_options = "hold_position")
+  kable_styling(bootstrap_options = c("striped"), full_width = F, font_size = 9, latex_options = "hold_position")
 
 ```
 
-<br>
-<br>
-<br>
 
 ## Conclusions and Summary
 
-Examining whether elevation is a factor in kicking length, we discovered through the Mann–Whitney U tes that there is weak evidence to support a significant difference in kick lengths between kicks performed in high altitude stadiums and kicks performed in low altitude stadiums. We also saw through the Wilcoxon signed-rank test that there was no significant difference in field goal success for team home games vs. away games. Moreover, investigating the association between kick lengths and kick outcomes, both models that we fitted suggests that an increase in kick length is associated with a decrease in successful kick attempts. This is consistent with our exploration- which suggests that the average kick length for successful kicks is lower than the average kick length for unsuccessful kicks. A possible explanation may be because of the increasing lack of accuracy when it comes to kicking longer lengths. Finally, in  assessing whether or not a kick would be successful, coaches should place most importance on the starting yard line and also consider the game clock- as these variables were first and second respectively in importance among our ML models.
-
-<br>
+Examining whether elevation is a factor in kicking length, we discovered through the Mann–Whitney U tes that there is weak evidence to support a significant difference in kick lengths between kicks performed in high altitude stadiums and kicks performed in low altitude stadiums. We also saw through the Wilcoxon signed-rank test that there was no significant difference in field goal success for team home games vs. away games. Moreover, investigating the association between kick lengths and kick outcomes, both models that we fitted suggests that an increase in kick length is associated with a decrease in successful kick attempts. This is consistent with our exploration- which suggests that the average kick length for successful kicks is lower than the average kick length for unsuccessful kicks. A possible explanation may be because of the increasing lack of accuracy when it comes to kicking longer lengths. Finally, in assessing whether or not a kick would be successful, coaches should place most importance on the starting yard line and also consider the game clock- as these variables were first and second respectively in importance among our ML models.
 
 ### Limitations
 
 This report was limited to a relatively small sample size. While we were only able to examine 3 years of NFL games, ideally the report should be repeated with a dataset of field goal kicks for a decade of NFL games. Moreover, the process of finding data on players beyond basic characteristics such as age, weight and height was difficult. Being a good kicker also relies on mental factors such as how well a player is able to perform under pressure. However, these variables are difficult to quantify and hence, difficult to retrieve data for.
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-
-
