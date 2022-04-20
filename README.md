@@ -4,6 +4,8 @@ This project was completed as a part of the final assignment of JSC370, Data Sci
 
 The project website can be found at: https://annguyen1404.github.io/JSC370-final/
 
+The analysis can be found in the 'Analysis' tab.
+
 The PDF report can be found at: https://github.com/annguyen1404/JSC370-final/blob/main/pdf-report/jsc370_report.pdf
 
 ## The Project

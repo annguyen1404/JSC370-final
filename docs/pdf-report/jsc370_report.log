@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.4.7)  19 APR 2022 15:57
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.4.7)  20 APR 2022 04:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -554,58 +554,58 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 [1
 
 {c:/Users/anngu/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-<jsc370_report_files/figure-latex/unnamed-chunk-10-1.pdf, id=28, 469.755pt x 325.215pt>
+<jsc370_report_files/figure-latex/unnamed-chunk-10-1.pdf, id=29, 469.755pt x 325.215pt>
 File: jsc370_report_files/figure-latex/unnamed-chunk-10-1.pdf Graphic file (type pdf)
 <use jsc370_report_files/figure-latex/unnamed-chunk-10-1.pdf>
-Package pdftex.def Info: jsc370_report_files/figure-latex/unnamed-chunk-10-1.pdf  used on input line 218.
+Package pdftex.def Info: jsc370_report_files/figure-latex/unnamed-chunk-10-1.pdf  used on input line 219.
 (pdftex.def)             Requested size: 289.97638pt x 200.75287pt.
 [2 <./jsc370_report_files/figure-latex/unnamed-chunk-10-1.pdf>]
-<jsc370_report_files/figure-latex/unnamed-chunk-11-1.pdf, id=46, 469.755pt x 325.215pt>
+<jsc370_report_files/figure-latex/unnamed-chunk-11-1.pdf, id=47, 469.755pt x 325.215pt>
 File: jsc370_report_files/figure-latex/unnamed-chunk-11-1.pdf Graphic file (type pdf)
 <use jsc370_report_files/figure-latex/unnamed-chunk-11-1.pdf>
-Package pdftex.def Info: jsc370_report_files/figure-latex/unnamed-chunk-11-1.pdf  used on input line 232.
+Package pdftex.def Info: jsc370_report_files/figure-latex/unnamed-chunk-11-1.pdf  used on input line 233.
 (pdftex.def)             Requested size: 289.97638pt x 200.75287pt.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <9> on input line 273.
+(Font)              <9> on input line 274.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<jsc370_report_files/figure-latex/unnamed-chunk-13-1.pdf, id=47, 469.755pt x 325.215pt>
+<jsc370_report_files/figure-latex/unnamed-chunk-13-1.pdf, id=48, 469.755pt x 325.215pt>
 File: jsc370_report_files/figure-latex/unnamed-chunk-13-1.pdf Graphic file (type pdf)
 <use jsc370_report_files/figure-latex/unnamed-chunk-13-1.pdf>
-Package pdftex.def Info: jsc370_report_files/figure-latex/unnamed-chunk-13-1.pdf  used on input line 294.
+Package pdftex.def Info: jsc370_report_files/figure-latex/unnamed-chunk-13-1.pdf  used on input line 295.
 (pdftex.def)             Requested size: 231.9811pt x 160.6023pt.
 [3 <./jsc370_report_files/figure-latex/unnamed-chunk-11-1.pdf>] [4
 pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.349 
+l.350 
       
 pdfTeX warning (ext4): destination with the same identifier (name{table.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.349 
+l.350 
        <./jsc370_report_files/figure-latex/unnamed-chunk-13-1.pdf>]
-<jsc370_report_files/figure-latex/unnamed-chunk-19-1.pdf, id=77, 469.755pt x 325.215pt>
+<jsc370_report_files/figure-latex/unnamed-chunk-19-1.pdf, id=78, 469.755pt x 325.215pt>
 File: jsc370_report_files/figure-latex/unnamed-chunk-19-1.pdf Graphic file (type pdf)
 <use jsc370_report_files/figure-latex/unnamed-chunk-19-1.pdf>
-Package pdftex.def Info: jsc370_report_files/figure-latex/unnamed-chunk-19-1.pdf  used on input line 432.
+Package pdftex.def Info: jsc370_report_files/figure-latex/unnamed-chunk-19-1.pdf  used on input line 433.
 (pdftex.def)             Requested size: 217.48048pt x 150.56342pt.
 [5
 pdfTeX warning (ext4): destination with the same identifier (name{table.3}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.432 ...re-latex/unnamed-chunk-19-1} \end{center}
+l.433 ...re-latex/unnamed-chunk-19-1} \end{center}
                                                   
 pdfTeX warning (ext4): destination with the same identifier (name{table.4}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.432 ...re-latex/unnamed-chunk-19-1} \end{center}
+l.433 ...re-latex/unnamed-chunk-19-1} \end{center}
                                                   ]
-<jsc370_report_files/figure-latex/unnamed-chunk-21-1.pdf, id=90, 469.755pt x 325.215pt>
+<jsc370_report_files/figure-latex/unnamed-chunk-21-1.pdf, id=91, 469.755pt x 325.215pt>
 File: jsc370_report_files/figure-latex/unnamed-chunk-21-1.pdf Graphic file (type pdf)
 <use jsc370_report_files/figure-latex/unnamed-chunk-21-1.pdf>
-Package pdftex.def Info: jsc370_report_files/figure-latex/unnamed-chunk-21-1.pdf  used on input line 492.
+Package pdftex.def Info: jsc370_report_files/figure-latex/unnamed-chunk-21-1.pdf  used on input line 493.
 (pdftex.def)             Requested size: 217.48048pt x 150.56342pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
@@ -614,38 +614,38 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 pdfTeX warning (ext4): destination with the same identifier (name{table.5}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.515 
+l.516 
       
 pdfTeX warning (ext4): destination with the same identifier (name{table.6}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.515 
+l.516 
       
 pdfTeX warning (ext4): destination with the same identifier (name{table.7}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.515 
+l.516 
        <./jsc370_report_files/figure-latex/unnamed-chunk-19-1.pdf> <./jsc370_report_files/figure-latex/unnamed-chunk-21-1.pdf>]
-<jsc370_report_files/figure-latex/unnamed-chunk-24-1.pdf, id=119, 469.755pt x 325.215pt>
+<jsc370_report_files/figure-latex/unnamed-chunk-24-1.pdf, id=120, 469.755pt x 325.215pt>
 File: jsc370_report_files/figure-latex/unnamed-chunk-24-1.pdf Graphic file (type pdf)
 <use jsc370_report_files/figure-latex/unnamed-chunk-24-1.pdf>
-Package pdftex.def Info: jsc370_report_files/figure-latex/unnamed-chunk-24-1.pdf  used on input line 536.
+Package pdftex.def Info: jsc370_report_files/figure-latex/unnamed-chunk-24-1.pdf  used on input line 537.
 (pdftex.def)             Requested size: 217.48048pt x 150.56342pt.
-<jsc370_report_files/figure-latex/unnamed-chunk-29-1.pdf, id=120, 469.755pt x 325.215pt>
+<jsc370_report_files/figure-latex/unnamed-chunk-29-1.pdf, id=121, 469.755pt x 325.215pt>
 File: jsc370_report_files/figure-latex/unnamed-chunk-29-1.pdf Graphic file (type pdf)
 <use jsc370_report_files/figure-latex/unnamed-chunk-29-1.pdf>
-Package pdftex.def Info: jsc370_report_files/figure-latex/unnamed-chunk-29-1.pdf  used on input line 564.
+Package pdftex.def Info: jsc370_report_files/figure-latex/unnamed-chunk-29-1.pdf  used on input line 565.
 (pdftex.def)             Requested size: 289.97638pt x 200.75287pt.
 [7
 pdfTeX warning (ext4): destination with the same identifier (name{table.8}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.564 ...re-latex/unnamed-chunk-29-1} \end{center}
+l.565 ...re-latex/unnamed-chunk-29-1} \end{center}
                                                    <./jsc370_report_files/figure-latex/unnamed-chunk-24-1.pdf>] [8
 pdfTeX warning (ext4): destination with the same identifier (name{table.9}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.626 \end{document}
+l.627 \end{document}
                      <./jsc370_report_files/figure-latex/unnamed-chunk-29-1.pdf>] (./jsc370_report.aux)
 
 LaTeX Warning: There were multiply-defined labels.
@@ -660,10 +660,10 @@ Here is how much of TeX's memory you used:
  14 hyphenation exceptions out of 8191
  74i,9n,77p,518b,394s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {c:/Users/anngu/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{c:/Users/anngu/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{c:/Users/anngu/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{c:/Users/anngu/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{c:/Users/anngu/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}<c:/Users/anngu/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb><c:/Users/anngu/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/Users/anngu/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb><c:/Users/anngu/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/Users/anngu/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/Users/anngu/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb><c:/Users/anngu/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb><c:/Users/anngu/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr9.pfb><c:/Users/anngu/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Users/anngu/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy7.pfb>
-Output written on jsc370_report.pdf (8 pages, 826679 bytes).
+Output written on jsc370_report.pdf (8 pages, 826779 bytes).
 PDF statistics:
- 259 PDF objects out of 1000 (max. 8388607)
- 206 compressed objects within 3 object streams
+ 260 PDF objects out of 1000 (max. 8388607)
+ 207 compressed objects within 3 object streams
  50 named destinations out of 1000 (max. 500000)
  116 words of extra memory for PDF output out of 10000 (max. 10000000)
 

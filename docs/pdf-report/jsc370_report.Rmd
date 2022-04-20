@@ -76,7 +76,7 @@ Before we dive into the analysis, we need to go over common football terminologi
 
 The repo link for this project is: https://github.com/annguyen1404/JSC370-final
 
-The website link for this project is: [LINK]
+The website link for this project is: https://annguyen1404.github.io/JSC370-final/
 
 
 ## Methods

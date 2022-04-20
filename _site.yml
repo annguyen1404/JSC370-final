@@ -4,7 +4,7 @@ navbar:
   title: "<img id=\"logo\" style=\"width: 90px;\" src=\"assets/logo2.png\" />"
   author: "Chloe Nguyen"
   left:
-    - text: "Home"
+    - text: "Analysis"
       href: index.html
     - text: "Author"
       href: about.html
