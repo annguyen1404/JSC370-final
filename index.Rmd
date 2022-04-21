@@ -567,13 +567,13 @@ data_yardline %>%
 
 <br>
 
-From this, we investigate the field goal performance of each team by average starting yard line in a season. In this plot, each dot size corresponds to the number of field goal attempts made by each team in a season. Notice that the most season field goal success rates were above 65%. Moreover, we see that the Tennessee Titans (TEN) were significantly less successful in the 2019 season compared to all others NFL teams in all season between 2018 to 2020. In 2019, their success rate was only 33.33% with 15 attempts. From external knowledge, the Tennessee Titan’s main kicker was injured at this time and hence, was unable to play- leading the team to go through four different kickers with evidently little success. The best seasons for any team in terms of proportion of successful field goal attempts had 100% success rate. These seasons are: 2020 Pittsburgh Steelers (PIT)- average yard line of 18.1 with 21 attempts, 2020 Green Bay Packers (GB)- average yard line of 22 with 15 attempts, and 2020 Seattle Seahawks (SEA)- average yard line of 22.9 with 20 attempts.
+From this, we investigate the average field goal performance of each team by average starting yard line over the 3 seasons. In this plot, each dot size corresponds to the number of field goal attempts made by each team in a season. Notice that most average success rates were above 75%. Moreover, we see that the Tennessee Titans (TEN) were the least successful team compared to all others NFL teams. From external knowledge, the Tennessee Titan’s main kicker was injured in 2019 and hence, was unable to play- leading the team to go through four different kickers with evidently little success. The team with the highest success proportion is the Baltimore Ravens (BAL) with 92%. Their kicker, Justin Tucker, currently holds the title as the most accurate kicker in NFL history.
 
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 
 data_team_season <- data %>%
-  group_by(possessionTeam, season) %>%
+  group_by(possessionTeam) %>%
   summarise (
     attempts = n(),
     prop_success = mean(specialTeamsSuccess),
@@ -585,12 +585,11 @@ data_team_season %>%
           size=~attempts, sizes = c(5, 70), marker=list(sizemode='diameter', opacity = 0.5),
           hover_info="text",
           text = ~paste(paste0("Team: ", possessionTeam),
-                        paste0("Season: ", season),
                         paste0("Number of Attempts: ", attempts),
                         paste0("Proportion of Successful Kicks: ", round(prop_success, 2)),
                         paste0("Average Yard Line: ", round(avg_yardline, 2)),
                         sep="<br>"))  %>%
-  layout(title="Average Yard Line vs. Proportion of Successful Kicks <br> by Teams Each Season (2018-2020)", 
+  layout(title="Average Yard Line vs. Proportion of Successful Kicks <br> by Teams (2018-2020)", 
          yaxis=list(title="Proportion of Successful Kicks"),
          xaxis=list(title="Average Yard Line"),
          hovermode="compare")
