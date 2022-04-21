@@ -8,7 +8,7 @@ The analysis can be found in the 'Analysis' tab.
 
 The PDF report can be found at: https://github.com/annguyen1404/JSC370-final/blob/main/pdf-report/jsc370_report.pdf
 
-The video walkthrough can be found here:
+The video walkthrough can be found at:
 https://drive.google.com/file/d/1KeWoAGGnjBwmaD-MpTzo2HNHr2eeHAuc/view?usp=sharing
 
 ## The Project
