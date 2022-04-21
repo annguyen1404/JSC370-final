@@ -8,6 +8,9 @@ The analysis can be found in the 'Analysis' tab.
 
 The PDF report can be found at: https://github.com/annguyen1404/JSC370-final/blob/main/pdf-report/jsc370_report.pdf
 
+The video walkthrough can be found here:
+https://drive.google.com/file/d/1KeWoAGGnjBwmaD-MpTzo2HNHr2eeHAuc/view?usp=sharing
+
 ## The Project
 
 This project provides an analysis on NFL field goal kicks of the 2018-2020 seasons. The aim of the project is to help football coaches  assess whether a field goal kick would be successful at a certain game moment to help determine their next game play.

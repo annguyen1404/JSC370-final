@@ -97,7 +97,7 @@ knitr::include_graphics("assets/landing.jpg")
 
 # OTHER MEDIAS
 
-##### A video walkthrough of this project can be found here: <br> https://drive.google.com/drive/folders/1duI8DXPaXU2uYFOgJt5PpI_0L3n_Vb-I?usp=sharing
+##### A video walkthrough of this project can be found here: <br> https://drive.google.com/file/d/1KeWoAGGnjBwmaD-MpTzo2HNHr2eeHAuc/view?usp=sharing
 
 ##### A pdf version of this analysis can be found here: <br> https://github.com/annguyen1404/JSC370-final/blob/main/pdf-report/jsc370_report.pdf
 
